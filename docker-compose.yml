@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  node:
+    build:
+      context: .
+      args:
+        SSH_PRIVATE_KEY: /run/secrets/user_private_ssh_key
+        SSH_PUBLIC_KEY: /run/secrets/user_public_ssh_key
+        SSH_CONFIG: /run/secrets/ssh_config
+    volumes:
+      - ./:/home/node/app
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+      - /etc/hosts:/etc/hosts:ro
+    environment:
+      SSH_PRIVATE_KEY: /run/secrets/user_private_ssh_key
+      SSH_PUBLIC_KEY: /run/secrets/user_public_ssh_key
+      SSH_CONFIG: /run/secrets/ssh_config
+    ports:
+      - 3000:3000
+    secrets:
+      - source: user_private_ssh_key
+      - source: user_public_ssh_key
+      - source: ssh_config
+
+secrets:
+  user_private_ssh_key:
+    file: ~/.ssh/id_rsa
+  user_public_ssh_key:
+    file: ~/.ssh/id_rsa.pub
+  ssh_config:
+    file: ~/.ssh/config
