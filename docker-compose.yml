@@ -3,10 +3,10 @@ services:
   node:
     build:
       context: .
-      // args:
-      //   SSH_PRIVATE_KEY: /run/secrets/user_private_ssh_key
-      //   SSH_PUBLIC_KEY: /run/secrets/user_public_ssh_key
-      //   SSH_CONFIG: /run/secrets/ssh_config
+      # args:
+      #   SSH_PRIVATE_KEY: /run/secrets/user_private_ssh_key
+      #   SSH_PUBLIC_KEY: /run/secrets/user_public_ssh_key
+      #   SSH_CONFIG: /run/secrets/ssh_config
     volumes:
       - ./:/home/node/app
       - /etc/passwd:/etc/passwd:ro
